@@ -38,4 +38,3 @@ msbuild.wrn
 
 # ignore appsettings configuration files
 **Ws.Financeiro.API/appsettings.Development.json
-**Ws.Financeiro.API/appsettings.json
