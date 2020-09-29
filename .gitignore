@@ -35,3 +35,8 @@ msbuild.wrn
 
 # Visual Studio 2015
 .vs/
+
+# ignore appsettings configuration files
+**Ws.Financeiro.API/appsettings.development.json
+**Ws.Financeiro.API/appsettings.staging.json
+**Ws.Financeiro.API/appsettings.production.json

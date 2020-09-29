@@ -15,7 +15,7 @@ namespace Ws.Financeiro.Infra.Repository
         {
         }
 
-        public async Task<Gasto> ObterFornecedorData(DateTime data)
+        public async Task<Gasto> ObterGastoData(DateTime data)
         {
             return await Db.Gastos.AsNoTracking()
                 .FirstOrDefaultAsync(c => c.Data == data);

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Ws.Financeiro.Domain.Models;
 
@@ -10,7 +8,7 @@ namespace Ws.Financeiro.Domain.Intefaces.Service
     {
         Task<bool> Adicionar(Gasto gasto);
         Task<bool> Atualizar(Gasto gasto);
-        Task<bool> Remover(Guid id);
+        Task<bool> Remover(int id);
 
     }
 }

@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using System.ComponentModel.DataAnnotations;
+using FluentValidation.Results;
 using Ws.Financeiro.Domain.Intefaces;
 using Ws.Financeiro.Domain.Models;
 using Ws.Financeiro.Domain.Notificacoes;

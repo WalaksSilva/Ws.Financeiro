@@ -8,6 +8,6 @@ namespace Ws.Financeiro.Domain.Intefaces.Repository
 {
     public interface IGastoRepository : IRepository<Gasto>
     {
-        Task<Gasto> ObterFornecedorData(DateTime data);
+        Task<Gasto> ObterGastoData(DateTime data);
     }
 }

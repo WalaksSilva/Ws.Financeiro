@@ -1,15 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using AutoMapper;
+using Ws.Financeiro.Infra.Context;
+using Microsoft.EntityFrameworkCore;
+using Ws.Financeiro.Domain.Intefaces.Repository;
+using Ws.Financeiro.Infra.Repository;
+using Ws.Financeiro.Domain.Intefaces;
+using Ws.Financeiro.Domain.Notificacoes;
+using Ws.Financeiro.Domain.Services;
+using Ws.Financeiro.Domain.Intefaces.Service;
 
 namespace Ws.Financeiro.API
 {
@@ -25,7 +27,12 @@ namespace Ws.Financeiro.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<EntityContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddAutoMapper(typeof(Startup));
             services.AddControllers();
+
+            RegisterServices(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,6 +53,14 @@ namespace Ws.Financeiro.API
             {
                 endpoints.MapControllers();
             });
+        }
+
+        private void RegisterServices(IServiceCollection services)
+        {
+            services.AddScoped<IGastoRepository, GastoRepository>();
+            services.AddScoped<INotificador, Notificador>();
+
+            services.AddScoped<IGastoService, GastoService>();
         }
     }
 }
