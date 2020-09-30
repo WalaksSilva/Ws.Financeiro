@@ -28,20 +28,8 @@ namespace Ws.Financeiro.Infra.Context
 
             foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys())) relationship.DeleteBehavior = DeleteBehavior.ClientSetNull;
 
-            modelBuilder.Entity<Gasto>()
-            .HasOne(c => c.Categoria)
-            .WithMany(g => g.Gastos)
-            .HasForeignKey(c => c.IdCategoria);
-
-            modelBuilder.Entity<Gasto>().HasKey(x => x.Id);
-            modelBuilder.Entity<Categoria>().HasKey(x => x.Id);
-            modelBuilder.Entity<TipoPagamento>().HasKey(x => x.Id);
-
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Gasto>()
-            .Property(p => p.Valor)
-            .HasColumnType("decimal(18,4)");
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())

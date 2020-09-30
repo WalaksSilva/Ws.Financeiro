@@ -12,20 +12,24 @@ namespace Ws.Financeiro.Infra.Mappings
 
             builder.Property(p => p.Descricao)
                 .IsRequired()
-                .HasColumnType("varchar(200)");
+                .HasColumnType("varchar(500)");
+
+            builder.Property(p => p.Valor)
+                .IsRequired()
+                .HasColumnType("decimal(18, 4)");
 
             builder.Property(p => p.Data)
                 .IsRequired()
                 .HasColumnType("datetime");
 
-            //// 1 : 1 => Fornecedor : Endereco
-            //builder.HasOne(f => f.Endereco)
-            //    .WithOne(e => e.Fornecedor);
+            builder.HasOne(c => c.Categoria)
+            .WithMany(g => g.Gastos)
+            .HasForeignKey(c => c.IdCategoria);
 
-            //// 1 : N => Fornecedor : Produtos
-            //builder.HasMany(f => f.Produtos)
-            //    .WithOne(p => p.Fornecedor)
-            //    .HasForeignKey(p => p.FornecedorId);
+            builder.HasOne(c => c.TipoPagamento)
+            .WithMany(g => g.Gastos)
+            .HasForeignKey(c => c.IdTipoPagamento);
+
 
             builder.ToTable("Gastos");
         }

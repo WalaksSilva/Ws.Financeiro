@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Ws.Financeiro.Infra.Migrations
 {
-    public partial class teste : Migration
+    public partial class Inicial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,7 @@ namespace Ws.Financeiro.Infra.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(type: "varchar(100)", nullable: true)
+                    Nome = table.Column<string>(type: "varchar(200)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -21,16 +21,16 @@ namespace Ws.Financeiro.Infra.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TipoPagamento",
+                name: "TipoPagamentos",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(type: "varchar(100)", nullable: true)
+                    Nome = table.Column<string>(type: "varchar(200)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TipoPagamento", x => x.Id);
+                    table.PrimaryKey("PK_TipoPagamentos", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -39,12 +39,11 @@ namespace Ws.Financeiro.Infra.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Descricao = table.Column<string>(type: "varchar(200)", nullable: false),
-                    Valor = table.Column<decimal>(type: "decimal(18,4)", nullable: false),
+                    Descricao = table.Column<string>(type: "varchar(500)", nullable: false),
+                    Valor = table.Column<decimal>(type: "decimal(18, 4)", nullable: false),
                     Data = table.Column<DateTime>(type: "datetime", nullable: false),
                     IdCategoria = table.Column<int>(nullable: false),
-                    IdTipoPagamento = table.Column<int>(nullable: false),
-                    TipoPagamentoId = table.Column<int>(nullable: true)
+                    IdTipoPagamento = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -56,9 +55,9 @@ namespace Ws.Financeiro.Infra.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Gastos_TipoPagamento_TipoPagamentoId",
-                        column: x => x.TipoPagamentoId,
-                        principalTable: "TipoPagamento",
+                        name: "FK_Gastos_TipoPagamentos_IdTipoPagamento",
+                        column: x => x.IdTipoPagamento,
+                        principalTable: "TipoPagamentos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -69,9 +68,9 @@ namespace Ws.Financeiro.Infra.Migrations
                 column: "IdCategoria");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Gastos_TipoPagamentoId",
+                name: "IX_Gastos_IdTipoPagamento",
                 table: "Gastos",
-                column: "TipoPagamentoId");
+                column: "IdTipoPagamento");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -83,7 +82,7 @@ namespace Ws.Financeiro.Infra.Migrations
                 name: "Categorias");
 
             migrationBuilder.DropTable(
-                name: "TipoPagamento");
+                name: "TipoPagamentos");
         }
     }
 }

@@ -27,7 +27,8 @@ namespace Ws.Financeiro.Infra.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Nome")
-                        .HasColumnType("varchar(100)");
+                        .IsRequired()
+                        .HasColumnType("varchar(200)");
 
                     b.HasKey("Id");
 
@@ -46,7 +47,7 @@ namespace Ws.Financeiro.Infra.Migrations
 
                     b.Property<string>("Descricao")
                         .IsRequired()
-                        .HasColumnType("varchar(200)");
+                        .HasColumnType("varchar(500)");
 
                     b.Property<int>("IdCategoria")
                         .HasColumnType("int");
@@ -54,17 +55,14 @@ namespace Ws.Financeiro.Infra.Migrations
                     b.Property<int>("IdTipoPagamento")
                         .HasColumnType("int");
 
-                    b.Property<int?>("TipoPagamentoId")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("Valor")
-                        .HasColumnType("decimal(18,4)");
+                        .HasColumnType("decimal(18, 4)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("IdCategoria");
 
-                    b.HasIndex("TipoPagamentoId");
+                    b.HasIndex("IdTipoPagamento");
 
                     b.ToTable("Gastos");
                 });
@@ -77,11 +75,12 @@ namespace Ws.Financeiro.Infra.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Nome")
-                        .HasColumnType("varchar(100)");
+                        .IsRequired()
+                        .HasColumnType("varchar(200)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("TipoPagamento");
+                    b.ToTable("TipoPagamentos");
                 });
 
             modelBuilder.Entity("Ws.Financeiro.Domain.Models.Gasto", b =>
@@ -93,7 +92,8 @@ namespace Ws.Financeiro.Infra.Migrations
 
                     b.HasOne("Ws.Financeiro.Domain.Models.TipoPagamento", "TipoPagamento")
                         .WithMany("Gastos")
-                        .HasForeignKey("TipoPagamentoId");
+                        .HasForeignKey("IdTipoPagamento")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
