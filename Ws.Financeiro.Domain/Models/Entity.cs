@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Ws.Financeiro.Domain.Models
 {
@@ -10,7 +8,6 @@ namespace Ws.Financeiro.Domain.Models
         //{
         //    Id = Guid.NewGuid();
         //}
-
         public int Id { get; set; }
     }
 }

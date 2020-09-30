@@ -10,7 +10,7 @@ namespace Ws.Financeiro.Infra.Mappings
         {
             builder.HasKey(p => p.Id);
 
-            builder.Property(p => p.Nome)
+            builder.Property(p => p.Descricao)
                 .IsRequired()
                 .HasColumnType("varchar(200)");
 
