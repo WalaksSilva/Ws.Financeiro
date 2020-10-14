@@ -15,6 +15,7 @@ namespace Ws.Financeiro.API.AutoMapper
         public MappingProfiles()
         {
             CreateMap<Gasto, GastoViewModel>().ReverseMap();
+            CreateMap<Categoria, CategoriaViewModel>().ReverseMap();
         }
     }
 }
