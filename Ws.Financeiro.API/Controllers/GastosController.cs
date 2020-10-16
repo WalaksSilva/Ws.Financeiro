@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Ws.Financeiro.API.ViewModels;
 using Ws.Financeiro.Domain.Intefaces;
@@ -72,6 +73,15 @@ namespace Ws.Financeiro.API.Controllers
             await _gastoService.Remover(id);
 
             return CustomResponse(gastoViewModel);
+        }
+
+        [HttpGet("gastos-por-data")]
+        public async Task<ActionResult<IEnumerable<GastoPorDataViewModel>>> ObterGastosAgrupadosPorData()
+        {
+            var gastosPorData = await _gastoService.ObterGastosAgrupadosPorData();
+            var gastosPrDataViewModel = gastosPorData.Select(x => new GastoPorDataViewModel(x.Data, _mapper.Map<IEnumerable<GastoViewModel>>(x.Gastos))).ToList();
+
+            return CustomResponse(gastosPrDataViewModel);
         }
     }
 }
