@@ -16,6 +16,7 @@ namespace Ws.Financeiro.API.AutoMapper
         {
             CreateMap<Gasto, GastoViewModel>().ReverseMap();
             CreateMap<Categoria, CategoriaViewModel>().ReverseMap();
+            CreateMap<TipoPagamento, TipoPagamentoViewModel>().ReverseMap();
         }
     }
 }

@@ -26,7 +26,9 @@ namespace Ws.Financeiro.API.Controllers
                                     ICategoriaRepository categoriaRepository, 
                                     ICategoriaService categoriaService, 
                                     IMapper mapper,
-                                    INotificador notificador) : base(notificador)
+                                    INotificador notificador) : base(notificador
+                                        
+                                    )
         {
             _categoriaRepository = categoriaRepository;
             _categoriaService = categoriaService;

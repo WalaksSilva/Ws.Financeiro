@@ -60,9 +60,11 @@ namespace Ws.Financeiro.API
             services.AddScoped<IGastoRepository, GastoRepository>();
             services.AddScoped<INotificador, Notificador>();
             services.AddScoped<ICategoriaRepository, CategoriaRepository>();
+            services.AddScoped<ITipoPagamentoRepository, TipoPagamentoRepository>();
 
             services.AddScoped<IGastoService, GastoService>();
             services.AddScoped<ICategoriaService, CategoriaService>();
+            services.AddScoped<ITipoPagamentoService, TipoPagamentoService>();
         }
     }
 }
