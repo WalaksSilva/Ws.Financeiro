@@ -29,11 +29,11 @@ namespace Ws.Financeiro.API.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
+        [HttpGet("")]
         public async Task<ActionResult<IEnumerable<GastoViewModel>>> ObeterTodos()
         {
             var gastos = _mapper.Map<IEnumerable<GastoViewModel>>(await _gastoRepository.ObterTodos());
-            return Ok(gastos);
+            return CustomResponse(gastos);
         }
 
         [HttpPost("")]
@@ -44,7 +44,34 @@ namespace Ws.Financeiro.API.Controllers
             var gasto = _mapper.Map<Gasto>(gastoViewModel);
             await _gastoService.Adicionar(gasto);
 
-            return gastoViewModel;
+            return CustomResponse(gastoViewModel);
+        }
+
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult<GastoViewModel>> Atualizar(int id, GastoViewModel gastoViewModel)
+        {
+            if (id != gastoViewModel.Id)
+            {
+                NotificarErro("Os ids informados não são iguais!");
+                return CustomResponse();
+            }
+
+            var gasto = _mapper.Map<Gasto>(gastoViewModel);
+            await _gastoService.Atualizar(gasto);
+
+            return CustomResponse(gastoViewModel);
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult<GastoViewModel>> Excluir(int id)
+        {
+            var gastoViewModel = _mapper.Map<GastoViewModel>(await _gastoRepository.ObterPorId(id));
+
+            if (gastoViewModel == null) return NotFound();
+
+            await _gastoService.Remover(id);
+
+            return CustomResponse(gastoViewModel);
         }
     }
 }

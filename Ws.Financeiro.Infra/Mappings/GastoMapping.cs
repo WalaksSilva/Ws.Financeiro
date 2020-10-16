@@ -16,7 +16,7 @@ namespace Ws.Financeiro.Infra.Mappings
 
             builder.Property(p => p.Valor)
                 .IsRequired()
-                .HasColumnType("decimal(18, 4)");
+                .HasColumnType("decimal(18, 2)");
 
             builder.Property(p => p.Data)
                 .IsRequired()

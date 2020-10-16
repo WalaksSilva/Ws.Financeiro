@@ -31,6 +31,7 @@ namespace Ws.Financeiro.Domain.Services
                 return false;
             }
 
+            //gasto.Data = DateTime.Now;
             await _gastoRepository.Adicionar(gasto);
             return true;
         }

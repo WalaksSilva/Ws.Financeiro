@@ -9,5 +9,6 @@ namespace Ws.Financeiro.Domain.Intefaces.Repository
     public interface IGastoRepository : IRepository<Gasto>
     {
         Task<Gasto> ObterGastoData(DateTime data);
+        Task<Gasto> ObterPorId(int id);
     }
 }

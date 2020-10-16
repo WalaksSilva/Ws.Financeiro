@@ -20,5 +20,11 @@ namespace Ws.Financeiro.Infra.Repository
             return await Db.Gastos.AsNoTracking()
                 .FirstOrDefaultAsync(c => c.Data == data);
         }
+
+        public async Task<Gasto> ObterPorId(int id)
+        {
+            return await Db.Gastos.AsNoTracking()
+                .FirstOrDefaultAsync(c => c.Id == id);
+        }
     }
 }
