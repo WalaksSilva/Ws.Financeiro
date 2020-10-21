@@ -83,5 +83,13 @@ namespace Ws.Financeiro.API.Controllers
 
             return CustomResponse(gastosPrDataViewModel);
         }
+
+        [HttpPost("filtrado")]
+        public async Task<ActionResult<IEnumerable<GastoViewModel>>> Filtro(GastoFiltroViewModel filtroViewModel)
+        {
+            var filtro = _mapper.Map<GastoFiltro>(filtroViewModel);
+            var gastosViewModel = _mapper.Map<IEnumerable<GastoViewModel>>(await _gastoRepository.Filtro(filtro));
+            return CustomResponse(gastosViewModel);
+        }
     }
 }
