@@ -22,8 +22,8 @@ namespace Ws.Financeiro.API.Controllers
                                 IGastoRepository gastoRepository,
                                 IGastoService gastoService,
                                 IMapper mapper,
-                                INotificador notificador) : base(notificador
-                                )
+                                INotificador notificador,
+                                IUser user) : base(notificador, user)
         {
             _gastoRepository = gastoRepository;
             _gastoService = gastoService;

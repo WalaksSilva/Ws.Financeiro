@@ -14,10 +14,21 @@ namespace Ws.Financeiro.API.Controllers
     public abstract class MainController : ControllerBase
     {
         private readonly INotificador _notificador;
+        public readonly IUser AppUser;
 
-        public MainController(INotificador notificador)
+        protected Guid UsuarioId { get; set; }
+        protected bool UsuarioAltenticado { get; set; }
+
+        public MainController(INotificador notificador, IUser appUser)
         {
             _notificador = notificador;
+            AppUser = appUser;
+
+            if (appUser.IsAuthenticated())
+            {
+                UsuarioId = appUser.GetUserId();
+                UsuarioAltenticado = true;
+            }
         }
 
         protected ActionResult CustomResponse(ModelStateDictionary modelState)

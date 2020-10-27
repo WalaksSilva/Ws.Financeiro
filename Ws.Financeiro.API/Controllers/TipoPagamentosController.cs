@@ -26,9 +26,8 @@ namespace Ws.Financeiro.API.Controllers
                                     ITipoPagamentoRepository tipoPagamentoRepository,
                                     ITipoPagamentoService tipoPagamentoService, 
                                     IMapper mapper,
-                                    INotificador notificador) : base(notificador
-                                        
-                                    )
+                                    INotificador notificador,
+                                    IUser user) : base(notificador, user)
         {
             _tipoPagamentoRepository = tipoPagamentoRepository;
             _tipoPagamentoService = tipoPagamentoService;

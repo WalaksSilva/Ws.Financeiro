@@ -12,6 +12,8 @@ using Ws.Financeiro.Domain.Intefaces;
 using Ws.Financeiro.Domain.Notificacoes;
 using Ws.Financeiro.Domain.Services;
 using Ws.Financeiro.Domain.Intefaces.Service;
+using Ws.Financeiro.API.Configuration;
+using Ws.Financeiro.API.Extensions;
 
 namespace Ws.Financeiro.API
 {
@@ -28,8 +30,11 @@ namespace Ws.Financeiro.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<EntityContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            
+            services.AddIdentityConfiguration(Configuration);
 
             services.AddAutoMapper(typeof(Startup));
+
             services.AddControllers();
 
             RegisterServices(services);
@@ -43,12 +48,15 @@ namespace Ws.Financeiro.API
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseAuthentication();
+
             app.UseHttpsRedirection();
+            //app.UseAuthorization();
+            //app.UseHttpsRedirection();
+
 
             app.UseRouting();
-
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
@@ -65,6 +73,8 @@ namespace Ws.Financeiro.API
             services.AddScoped<IGastoService, GastoService>();
             services.AddScoped<ICategoriaService, CategoriaService>();
             services.AddScoped<ITipoPagamentoService, TipoPagamentoService>();
+
+            services.AddScoped<IUser, AspNetUser>();
         }
     }
 }
