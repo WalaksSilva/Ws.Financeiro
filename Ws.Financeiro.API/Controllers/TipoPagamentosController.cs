@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Ws.Financeiro.API.ViewModels;
@@ -14,6 +15,7 @@ using Ws.Financeiro.Domain.Services;
 
 namespace Ws.Financeiro.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class TipoPagamentosController : MainController

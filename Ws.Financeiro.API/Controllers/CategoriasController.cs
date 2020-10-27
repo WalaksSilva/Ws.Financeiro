@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Ws.Financeiro.API.ViewModels;
 using Ws.Financeiro.Domain.Intefaces;
 using Ws.Financeiro.Domain.Intefaces.Repository;
 using Ws.Financeiro.Domain.Intefaces.Service;
 using Ws.Financeiro.Domain.Models;
-using Ws.Financeiro.Domain.Services;
 
 namespace Ws.Financeiro.API.Controllers
 {
