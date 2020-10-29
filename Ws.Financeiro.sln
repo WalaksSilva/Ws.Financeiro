@@ -3,11 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ws.Financeiro.API", "Ws.Financeiro.API\Ws.Financeiro.API.csproj", "{C376D51F-8F96-4089-BCB5-F8CC35E5900C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ws.Financeiro.API", "Ws.Financeiro.API\Ws.Financeiro.API.csproj", "{C376D51F-8F96-4089-BCB5-F8CC35E5900C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ws.Financeiro.Domain", "Ws.Financeiro.Domain\Ws.Financeiro.Domain.csproj", "{658E6013-F1B5-4FB8-A2F5-19BF3D1ABC5D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ws.Financeiro.Domain", "Ws.Financeiro.Domain\Ws.Financeiro.Domain.csproj", "{658E6013-F1B5-4FB8-A2F5-19BF3D1ABC5D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ws.Financeiro.Infra", "Ws.Financeiro.Infra\Ws.Financeiro.Infra.csproj", "{9DC17940-B246-4115-849B-5E8926C40D38}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ws.Financeiro.Infra", "Ws.Financeiro.Infra\Ws.Financeiro.Infra.csproj", "{9DC17940-B246-4115-849B-5E8926C40D38}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{5F23F21C-97A9-4B70-8606-E63BBC9B0640}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{ADE52065-384A-4627-88F0-9E5101B5AB98}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TesteIntegracao", "TesteIntegracao\TesteIntegracao.csproj", "{7525BDA2-BB74-4F34-B17C-39ECD3B6EE81}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TesteUnitario", "TesteUnitario\TesteUnitario.csproj", "{A57C1578-9718-4D8C-8AAD-BFB5B8856524}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,9 +35,24 @@ Global
 		{9DC17940-B246-4115-849B-5E8926C40D38}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9DC17940-B246-4115-849B-5E8926C40D38}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9DC17940-B246-4115-849B-5E8926C40D38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7525BDA2-BB74-4F34-B17C-39ECD3B6EE81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7525BDA2-BB74-4F34-B17C-39ECD3B6EE81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7525BDA2-BB74-4F34-B17C-39ECD3B6EE81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7525BDA2-BB74-4F34-B17C-39ECD3B6EE81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A57C1578-9718-4D8C-8AAD-BFB5B8856524}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A57C1578-9718-4D8C-8AAD-BFB5B8856524}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A57C1578-9718-4D8C-8AAD-BFB5B8856524}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A57C1578-9718-4D8C-8AAD-BFB5B8856524}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C376D51F-8F96-4089-BCB5-F8CC35E5900C} = {ADE52065-384A-4627-88F0-9E5101B5AB98}
+		{658E6013-F1B5-4FB8-A2F5-19BF3D1ABC5D} = {ADE52065-384A-4627-88F0-9E5101B5AB98}
+		{9DC17940-B246-4115-849B-5E8926C40D38} = {ADE52065-384A-4627-88F0-9E5101B5AB98}
+		{7525BDA2-BB74-4F34-B17C-39ECD3B6EE81} = {5F23F21C-97A9-4B70-8606-E63BBC9B0640}
+		{A57C1578-9718-4D8C-8AAD-BFB5B8856524} = {5F23F21C-97A9-4B70-8606-E63BBC9B0640}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {88B4FCC0-38D5-4F8E-B3F3-DFF60B7C6519}
