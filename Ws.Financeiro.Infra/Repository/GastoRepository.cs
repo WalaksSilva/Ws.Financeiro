@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Core.Objects;
@@ -29,10 +30,14 @@ namespace Ws.Financeiro.Infra.Repository
                 .FirstOrDefaultAsync(c => c.Id == id);
         }
 
-        
+        public async Task<IEnumerable<Gasto>> ObterGastosPorUsuarioAsync(int idUsuario)
+        {
+            return await Db.Gastos.Where(x => x.IdUsuario == idUsuario).ToListAsync();
+        }
+
         public async Task<IEnumerable<Gasto>> Filtro(GastoFiltro gastoFiltro)
         {
-            var query = Db.Gastos.AsNoTracking();
+            var query = Db.Gastos.Where(x => x.IdUsuario == gastoFiltro.IdUsuario).AsNoTracking();
 
             
             if (gastoFiltro.IdCategoria > 0)

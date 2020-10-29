@@ -17,9 +17,9 @@ namespace Ws.Financeiro.API.Extensions
 
         public string Name => _accessor.HttpContext.User.Identity.Name;
 
-        public Guid GetUserId()
+        public string GetUserId()
         {
-            return IsAuthenticated() ? Guid.Parse(_accessor.HttpContext.User.GetUserId()) : Guid.Empty;
+            return IsAuthenticated() ? _accessor.HttpContext.User.GetUserId() : string.Empty;
         }
 
         public string GetUserEmail()

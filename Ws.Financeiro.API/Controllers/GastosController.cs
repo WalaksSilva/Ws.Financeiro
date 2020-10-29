@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -35,7 +36,7 @@ namespace Ws.Financeiro.API.Controllers
         [HttpGet("")]
         public async Task<ActionResult<IEnumerable<GastoViewModel>>> ObeterTodos()
         {
-            var gastos = _mapper.Map<IEnumerable<GastoViewModel>>(await _gastoRepository.ObterTodos());
+            var gastos = _mapper.Map<IEnumerable<GastoViewModel>>(await _gastoRepository.ObterGastosPorUsuarioAsync(UsuarioId));
             return CustomResponse(gastos);
         }
 
@@ -45,6 +46,8 @@ namespace Ws.Financeiro.API.Controllers
             if (!ModelState.IsValid) return CustomResponse(ModelState);
 
             var gasto = _mapper.Map<Gasto>(gastoViewModel);
+            gasto.IdUsuario = UsuarioId;
+
             await _gastoService.Adicionar(gasto);
 
             return CustomResponse(gastoViewModel);
@@ -80,7 +83,7 @@ namespace Ws.Financeiro.API.Controllers
         [HttpGet("gastos-por-data")]
         public async Task<ActionResult<IEnumerable<GastoPorDataViewModel>>> ObterGastosAgrupadosPorData()
         {
-            var gastosPorData = await _gastoService.ObterGastosAgrupadosPorData();
+            var gastosPorData = await _gastoService.ObterGastosAgrupadosPorData(UsuarioId);
             var gastosPrDataViewModel = gastosPorData.Select(x => new GastoPorDataViewModel(x.Data, _mapper.Map<IEnumerable<GastoViewModel>>(x.Gastos))).ToList();
 
             return CustomResponse(gastosPrDataViewModel);
@@ -90,6 +93,7 @@ namespace Ws.Financeiro.API.Controllers
         public async Task<ActionResult<IEnumerable<GastoViewModel>>> Filtro(GastoFiltroViewModel filtroViewModel)
         {
             var filtro = _mapper.Map<GastoFiltro>(filtroViewModel);
+            filtro.IdUsuario = UsuarioId;
             var gastosViewModel = _mapper.Map<IEnumerable<GastoViewModel>>(await _gastoRepository.Filtro(filtro));
             return CustomResponse(gastosViewModel);
         }

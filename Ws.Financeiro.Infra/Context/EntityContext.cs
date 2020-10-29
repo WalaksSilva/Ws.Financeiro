@@ -11,7 +11,7 @@ using Ws.Financeiro.Domain.Models;
 
 namespace Ws.Financeiro.Infra.Context
 {
-    public class EntityContext : IdentityDbContext<ApplicationUser>
+    public class EntityContext : IdentityDbContext<ApplicationUser, IdentityRole<int>, int>
     {
         public EntityContext(DbContextOptions<EntityContext> options) : base(options) { }
 

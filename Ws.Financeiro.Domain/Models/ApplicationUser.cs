@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Ws.Financeiro.Domain.Models
 {
-    public class ApplicationUser : IdentityUser
+    public class ApplicationUser : IdentityUser<int>
     {
         public string CustomTag { get; set; }
     }

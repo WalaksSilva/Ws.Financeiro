@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Ws.Financeiro.Infra.Migrations
 {
-    public partial class Inical : Migration
+    public partial class Inicial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,7 +11,8 @@ namespace Ws.Financeiro.Infra.Migrations
                 name: "AspNetRoles",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "varchar(100)", nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "varchar(100)", maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(type: "varchar(100)", maxLength: 256, nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "varchar(100)", nullable: true)
@@ -25,7 +26,8 @@ namespace Ws.Financeiro.Infra.Migrations
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "varchar(100)", nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     UserName = table.Column<string>(type: "varchar(100)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "varchar(100)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "varchar(100)", maxLength: 256, nullable: true),
@@ -79,7 +81,7 @@ namespace Ws.Financeiro.Infra.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleId = table.Column<string>(type: "varchar(100)", nullable: false),
+                    RoleId = table.Column<int>(nullable: false),
                     ClaimType = table.Column<string>(type: "varchar(100)", nullable: true),
                     ClaimValue = table.Column<string>(type: "varchar(100)", nullable: true)
                 },
@@ -100,7 +102,7 @@ namespace Ws.Financeiro.Infra.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "varchar(100)", nullable: false),
+                    UserId = table.Column<int>(nullable: false),
                     ClaimType = table.Column<string>(type: "varchar(100)", nullable: true),
                     ClaimValue = table.Column<string>(type: "varchar(100)", nullable: true)
                 },
@@ -119,10 +121,10 @@ namespace Ws.Financeiro.Infra.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(type: "varchar(100)", maxLength: 128, nullable: false),
-                    ProviderKey = table.Column<string>(type: "varchar(100)", maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(type: "varchar(100)", nullable: false),
+                    ProviderKey = table.Column<string>(type: "varchar(100)", nullable: false),
                     ProviderDisplayName = table.Column<string>(type: "varchar(100)", nullable: true),
-                    UserId = table.Column<string>(type: "varchar(100)", nullable: false)
+                    UserId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -139,8 +141,8 @@ namespace Ws.Financeiro.Infra.Migrations
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "varchar(100)", nullable: false),
-                    RoleId = table.Column<string>(type: "varchar(100)", nullable: false)
+                    UserId = table.Column<int>(nullable: false),
+                    RoleId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -163,9 +165,9 @@ namespace Ws.Financeiro.Infra.Migrations
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "varchar(100)", nullable: false),
-                    LoginProvider = table.Column<string>(type: "varchar(100)", maxLength: 128, nullable: false),
-                    Name = table.Column<string>(type: "varchar(100)", maxLength: 128, nullable: false),
+                    UserId = table.Column<int>(nullable: false),
+                    LoginProvider = table.Column<string>(type: "varchar(100)", nullable: false),
+                    Name = table.Column<string>(type: "varchar(100)", nullable: false),
                     Value = table.Column<string>(type: "varchar(100)", nullable: true)
                 },
                 constraints: table =>

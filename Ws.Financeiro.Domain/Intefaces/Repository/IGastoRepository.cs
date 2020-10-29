@@ -11,5 +11,6 @@ namespace Ws.Financeiro.Domain.Intefaces.Repository
         Task<Gasto> ObterGastoData(DateTime data);
         Task<Gasto> ObterPorId(int id);
         Task<IEnumerable<Gasto>> Filtro(GastoFiltro gastoFiltro);
+        Task<IEnumerable<Gasto>> ObterGastosPorUsuarioAsync(int idUsuario);
     }
 }

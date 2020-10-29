@@ -50,9 +50,9 @@ namespace Ws.Financeiro.Domain.Services
             return true;
         }
 
-        public async Task<IEnumerable<GastoPorData>> ObterGastosAgrupadosPorData()
+        public async Task<IEnumerable<GastoPorData>> ObterGastosAgrupadosPorData(int idUsuario)
         {
-            var todosGastos = await _gastoRepository.ObterTodos();
+            var todosGastos = await _gastoRepository.ObterGastosPorUsuarioAsync(idUsuario);
             return todosGastos.GroupBy(x => x.Data.ToString("dd/MM/yyyy")).Select(x => new GastoPorData { Data = x.Key, Gastos = x.ToList() }).ToList();
         }
 

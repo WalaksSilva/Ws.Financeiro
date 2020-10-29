@@ -30,9 +30,9 @@ namespace Ws.Financeiro.Infra.Mappings
             .WithMany(g => g.Gastos)
             .HasForeignKey(c => c.IdTipoPagamento);
 
-            //builder.HasOne(c => c.Usuario)
-            //.WithMany()
-            //.HasForeignKey(c => c.IdUsuario);
+            builder.HasOne(c => c.Usuario)
+            .WithMany()
+            .HasForeignKey(c => c.IdUsuario);
 
             builder.ToTable("Gastos");
         }

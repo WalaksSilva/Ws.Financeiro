@@ -25,7 +25,7 @@ namespace Ws.Financeiro.API.Configuration
             //    //.AddErrorDescriber<IdentityMensagensPortugues>()
             //    .AddDefaultTokenProviders();
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole<int>>()
                     .AddEntityFrameworkStores<EntityContext>()
                     .AddDefaultTokenProviders();
 

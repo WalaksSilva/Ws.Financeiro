@@ -16,7 +16,7 @@ namespace Ws.Financeiro.API.Controllers
         private readonly INotificador _notificador;
         public readonly IUser AppUser;
 
-        protected Guid UsuarioId { get; set; }
+        protected int UsuarioId { get; set; }
         protected bool UsuarioAltenticado { get; set; }
 
         public MainController(INotificador notificador, IUser appUser)
@@ -26,7 +26,7 @@ namespace Ws.Financeiro.API.Controllers
 
             if (appUser.IsAuthenticated())
             {
-                UsuarioId = appUser.GetUserId();
+                UsuarioId = Convert.ToInt32(appUser.GetUserId());
                 UsuarioAltenticado = true;
             }
         }

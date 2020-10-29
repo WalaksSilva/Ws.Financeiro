@@ -10,5 +10,6 @@ namespace Ws.Financeiro.Domain.Models
         public int IdTipoPagamento { get; set; }
         public DateTime? DataInicio { get; set; }
         public DateTime? DataFim { get; set; }
+        public int IdUsuario { get; set; }
     }
 }

@@ -10,7 +10,7 @@ namespace Ws.Financeiro.Domain.Intefaces.Service
         Task<bool> Adicionar(Gasto gasto);
         Task<bool> Atualizar(Gasto gasto);
         Task<bool> Remover(int id);
-        Task<IEnumerable<GastoPorData>> ObterGastosAgrupadosPorData();
+        Task<IEnumerable<GastoPorData>> ObterGastosAgrupadosPorData(int idUsuario);
 
     }
 }
