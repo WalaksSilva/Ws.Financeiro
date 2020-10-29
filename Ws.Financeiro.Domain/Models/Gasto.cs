@@ -15,5 +15,7 @@ namespace Ws.Financeiro.Domain.Models
         public Categoria Categoria { get; set; }
         public int IdTipoPagamento { get; set; }
         public TipoPagamento TipoPagamento { get; set; }
+        //public string IdUsuario { get; set; }
+        //public Usuario Usuario { get; set; }
     }
 }

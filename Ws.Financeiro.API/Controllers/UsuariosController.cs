@@ -14,6 +14,7 @@ using Microsoft.IdentityModel.Tokens;
 using Ws.Financeiro.API.Extensions;
 using Ws.Financeiro.API.ViewModels;
 using Ws.Financeiro.Domain.Intefaces;
+using Ws.Financeiro.Domain.Models;
 
 namespace Ws.Financeiro.API.Controllers
 {
@@ -21,14 +22,14 @@ namespace Ws.Financeiro.API.Controllers
     [ApiController]
     public class UsuariosController : MainController
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly AppSettings _appSettings;
         private readonly ILogger _logger;
 
         public UsuariosController(INotificador notificador,
-                                  SignInManager<IdentityUser> signInManager,
-                                  UserManager<IdentityUser> userManager,
+                                  SignInManager<ApplicationUser> signInManager,
+                                  UserManager<ApplicationUser> userManager,
                                   IOptions<AppSettings> appSettings,
                                   ILogger<UsuariosController> logger,
                                   IUser user) : base(notificador, user)
@@ -44,7 +45,7 @@ namespace Ws.Financeiro.API.Controllers
         {
             if (!ModelState.IsValid) return CustomResponse(ModelState);
 
-            var user = new IdentityUser()
+            var user = new ApplicationUser()
             {
                 UserName = registerUser.Email,
                 Email = registerUser.Email,

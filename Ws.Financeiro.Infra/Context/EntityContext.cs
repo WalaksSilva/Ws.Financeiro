@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +11,7 @@ using Ws.Financeiro.Domain.Models;
 
 namespace Ws.Financeiro.Infra.Context
 {
-    public class EntityContext : DbContext
+    public class EntityContext : IdentityDbContext<ApplicationUser>
     {
         public EntityContext(DbContextOptions<EntityContext> options) : base(options) { }
 

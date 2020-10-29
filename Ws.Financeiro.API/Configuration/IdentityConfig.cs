@@ -6,7 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using Ws.Financeiro.API.Context;
+using Ws.Financeiro.Infra.Context;
+using Ws.Financeiro.Domain.Models;
 
 namespace Ws.Financeiro.API.Configuration
 {
@@ -15,14 +16,18 @@ namespace Ws.Financeiro.API.Configuration
         public static IServiceCollection AddIdentityConfiguration(this IServiceCollection services,
             IConfiguration configuration)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<EntityContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDefaultIdentity<IdentityUser>()
-                .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                //.AddErrorDescriber<IdentityMensagensPortugues>()
-                .AddDefaultTokenProviders();
+            //services.AddDefaultIdentity<ApplicationUser>()
+            //    .AddRoles<IdentityRole>()
+            //    .AddEntityFrameworkStores<EntityContext>()
+            //    //.AddErrorDescriber<IdentityMensagensPortugues>()
+            //    .AddDefaultTokenProviders();
+
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                    .AddEntityFrameworkStores<EntityContext>()
+                    .AddDefaultTokenProviders();
 
 
             // JWT
