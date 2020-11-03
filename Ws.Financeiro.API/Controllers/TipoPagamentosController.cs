@@ -39,7 +39,7 @@ namespace Ws.Financeiro.API.Controllers
         [HttpGet("")]
         public async Task<IEnumerable<TipoPagamentoViewModel>> ObterTodos()
         {
-            return _mapper.Map<IEnumerable<TipoPagamentoViewModel>>(await _tipoPagamentoRepository.ObterTodos());
+            return _mapper.Map<IEnumerable<TipoPagamentoViewModel>>(await _tipoPagamentoRepository.ObterTodosPorUsuario(UsuarioId));
         }
 
         [HttpPost("")]
@@ -48,6 +48,9 @@ namespace Ws.Financeiro.API.Controllers
             if (!ModelState.IsValid) return CustomResponse(ModelState);
 
             var tipoPagamento = _mapper.Map<TipoPagamento>(tipoPagamentoViewModel);
+
+            tipoPagamento.IdUsuario = UsuarioId;
+
             await _tipoPagamentoService.Adicionar(tipoPagamento);
 
             return CustomResponse(tipoPagamentoViewModel);
@@ -62,6 +65,13 @@ namespace Ws.Financeiro.API.Controllers
                 return CustomResponse();
             }
 
+            var tipoPagamentoValidacao = _mapper.Map<TipoPagamentoViewModel>(await _tipoPagamentoRepository.ObterTodosPorIdEndUsuario(id, UsuarioId));
+
+            if (tipoPagamentoValidacao == null)
+            {
+                return NotFound();
+            }
+
             if (!ModelState.IsValid) return CustomResponse(ModelState);
 
             var tipoPagamento = _mapper.Map<TipoPagamento>(tipoPagamentoViewModel);
@@ -73,7 +83,7 @@ namespace Ws.Financeiro.API.Controllers
         [HttpDelete("{id:int}")]
         public async Task<ActionResult<TipoPagamentoViewModel>> Excluir(int id)
         {
-            var tipoPagamentoViewModel = _mapper.Map<TipoPagamentoViewModel>(await _tipoPagamentoRepository.ObterPorId(id));
+            var tipoPagamentoViewModel = _mapper.Map<TipoPagamentoViewModel>(await _tipoPagamentoRepository.ObterTodosPorIdEndUsuario(id, UsuarioId));
 
             if (tipoPagamentoViewModel == null)
             {

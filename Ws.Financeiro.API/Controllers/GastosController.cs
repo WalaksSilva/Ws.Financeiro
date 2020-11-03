@@ -46,6 +46,7 @@ namespace Ws.Financeiro.API.Controllers
             if (!ModelState.IsValid) return CustomResponse(ModelState);
 
             var gasto = _mapper.Map<Gasto>(gastoViewModel);
+
             gasto.IdUsuario = UsuarioId;
 
             await _gastoService.Adicionar(gasto);
@@ -62,6 +63,12 @@ namespace Ws.Financeiro.API.Controllers
                 return CustomResponse();
             }
 
+            var gastoViewModelRetorno = _mapper.Map<GastoViewModel>(await _gastoRepository.ObterPorIdEndUsuario(id, UsuarioId));
+            if (gastoViewModelRetorno == null)
+            {
+                return NotFound();
+            }
+
             var gasto = _mapper.Map<Gasto>(gastoViewModel);
             await _gastoService.Atualizar(gasto);
 
@@ -71,7 +78,7 @@ namespace Ws.Financeiro.API.Controllers
         [HttpDelete("{id:int}")]
         public async Task<ActionResult<GastoViewModel>> Excluir(int id)
         {
-            var gastoViewModel = _mapper.Map<GastoViewModel>(await _gastoRepository.ObterPorId(id));
+            var gastoViewModel = _mapper.Map<GastoViewModel>(await _gastoRepository.ObterPorIdEndUsuario(id, UsuarioId));
 
             if (gastoViewModel == null) return NotFound();
 

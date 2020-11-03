@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Ws.Financeiro.Infra.Context;
 
 namespace Ws.Financeiro.Infra.Migrations
 {
     [DbContext(typeof(EntityContext))]
-    partial class EntityContextModelSnapshot : ModelSnapshot
+    [Migration("20201103173850_RelacionamentoCategoriaTipoPagamento")]
+    partial class RelacionamentoCategoriaTipoPagamento
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -262,9 +264,6 @@ namespace Ws.Financeiro.Infra.Migrations
 
                     b.Property<int>("IdUsuario")
                         .HasColumnType("int");
-
-                    b.Property<bool>("Pago")
-                        .HasColumnType("bit");
 
                     b.Property<decimal>("Valor")
                         .HasColumnType("decimal(18, 2)");

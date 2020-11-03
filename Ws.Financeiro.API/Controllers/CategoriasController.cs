@@ -35,7 +35,7 @@ namespace Ws.Financeiro.API.Controllers
         [HttpGet("")]
         public async Task<IEnumerable<CategoriaViewModel>> ObterTodos()
         {
-            return _mapper.Map<IEnumerable<CategoriaViewModel>>(await _categoriaRepository.ObterTodos());
+            return _mapper.Map<IEnumerable<CategoriaViewModel>>(await _categoriaRepository.ObterTodosPorUsuario(UsuarioId));
         }
 
         [HttpPost("")]
@@ -44,6 +44,9 @@ namespace Ws.Financeiro.API.Controllers
             if (!ModelState.IsValid) return CustomResponse(ModelState);
 
             var categoria = _mapper.Map<Categoria>(categoriaViewModel);
+
+            categoria.IdUsuario = UsuarioId;
+
             await _categoriaService.Adicionar(categoria);
 
             return CustomResponse(categoriaViewModel);
@@ -58,6 +61,12 @@ namespace Ws.Financeiro.API.Controllers
                 return CustomResponse();
             }
 
+            var categoriaViewModelRetorno = _mapper.Map<CategoriaViewModel>(await _categoriaRepository.ObterPorIdEndUsuario(id, UsuarioId));
+            if (categoriaViewModelRetorno == null)
+            {
+                return NotFound();
+            }
+
             if (!ModelState.IsValid) return CustomResponse(ModelState);
 
             var categoria = _mapper.Map<Categoria>(categoriaViewModel);
@@ -69,7 +78,7 @@ namespace Ws.Financeiro.API.Controllers
         [HttpDelete("{id:int}")]
         public async Task<ActionResult<CategoriaViewModel>> Excluir(int id)
         {
-            var categoriaViewModel = _mapper.Map<CategoriaViewModel>(await _categoriaRepository.ObterPorId(id));
+            var categoriaViewModel = _mapper.Map<CategoriaViewModel>(await _categoriaRepository.ObterPorIdEndUsuario(id, UsuarioId));
 
             if (categoriaViewModel == null)
             {

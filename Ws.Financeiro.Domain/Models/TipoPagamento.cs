@@ -10,5 +10,7 @@ namespace Ws.Financeiro.Domain.Models
     {
         public string Nome { get; set; }
         public IEnumerable<Gasto> Gastos { get; set; }
+        public int IdUsuario { get; set; }
+        public ApplicationUser Usuario { get; set; }
     }
 }

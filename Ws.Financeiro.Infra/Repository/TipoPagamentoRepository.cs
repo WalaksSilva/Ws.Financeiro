@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Ws.Financeiro.Domain.Intefaces.Repository;
@@ -20,6 +21,16 @@ namespace Ws.Financeiro.Infra.Repository
         {
             return await Db.TipoPagamento.AsNoTracking()
                 .FirstOrDefaultAsync(c => c.Id == id);
+        }
+
+        public async Task<TipoPagamento> ObterTodosPorIdEndUsuario(int id, int idUsuario)
+        {
+            return await Db.TipoPagamento.AsNoTracking().Where(x => x.Id == id && x.IdUsuario == idUsuario).FirstOrDefaultAsync();
+        }
+
+        public async Task<IEnumerable<TipoPagamento>> ObterTodosPorUsuario(int idUsuario)
+        {
+            return await Db.TipoPagamento.AsNoTracking().Where(x => x.IdUsuario == idUsuario).ToListAsync();
         }
     }
 }

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity.Core.Objects;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using Ws.Financeiro.Domain.Intefaces.Repository;
@@ -30,6 +31,12 @@ namespace Ws.Financeiro.Infra.Repository
                 .FirstOrDefaultAsync(c => c.Id == id);
         }
 
+        public async Task<Gasto> ObterPorIdEndUsuario(int id, int idUsuario)
+        {
+            return await Db.Gastos.AsNoTracking()
+                .FirstOrDefaultAsync(c => c.Id == id && c.IdUsuario == idUsuario);
+        }
+
         public async Task<IEnumerable<Gasto>> ObterGastosPorUsuarioAsync(int idUsuario)
         {
             return await Db.Gastos.Where(x => x.IdUsuario == idUsuario).ToListAsync();
@@ -53,7 +60,7 @@ namespace Ws.Financeiro.Infra.Repository
             if (gastoFiltro.DataInicio != null && gastoFiltro.DataFim != null)
             {
                 //var dataFim = gastoFiltro.DataFim.Value.AddDays(1);
-                query = query.Where(x => x.Data >= gastoFiltro.DataInicio && x.Data <= gastoFiltro.DataFim.Value.AddDays(1));
+                query = query.Where(x => x.IdUsuario == gastoFiltro.IdUsuario && x.Data >= gastoFiltro.DataInicio && x.Data <= gastoFiltro.DataFim.Value.AddDays(1));
             }
 
             var gastos = await query.ToListAsync();

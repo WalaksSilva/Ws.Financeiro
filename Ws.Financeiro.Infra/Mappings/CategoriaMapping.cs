@@ -17,6 +17,9 @@ namespace Ws.Financeiro.Infra.Mappings
                 .IsRequired()
                 .HasColumnType("varchar(200)");
 
+            builder.HasOne(c => c.Usuario)
+            .WithMany()
+            .HasForeignKey(c => c.IdUsuario);
 
             builder.ToTable("Categorias");
         }

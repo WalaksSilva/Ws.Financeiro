@@ -9,5 +9,6 @@ namespace Ws.Financeiro.API.ViewModels
     {
         public int Id { get; set; }
         public string Nome { get; set; }
+        public int IdUsuario { get; set; }
     }
 }

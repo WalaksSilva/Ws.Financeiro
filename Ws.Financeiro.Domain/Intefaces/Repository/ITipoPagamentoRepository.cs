@@ -8,6 +8,8 @@ namespace Ws.Financeiro.Domain.Intefaces.Repository
 {
     public interface ITipoPagamentoRepository : IRepository<TipoPagamento>
     {
+        Task<IEnumerable<TipoPagamento>> ObterTodosPorUsuario(int idUsuario);
 
+        Task<TipoPagamento> ObterTodosPorIdEndUsuario(int id, int idUsuario);
     }
 }
