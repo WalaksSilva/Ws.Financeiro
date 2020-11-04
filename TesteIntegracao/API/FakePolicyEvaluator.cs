@@ -18,6 +18,7 @@ namespace TesteIntegracao.API
             var testScheme = "FakeScheme";
             var principal = new ClaimsPrincipal();
             principal.AddIdentity(new ClaimsIdentity(new[] {
+            new Claim("sub", "1"),
             new Claim("Permission", "CanViewPage"),
             new Claim("Manager", "yes"),
             new Claim(ClaimTypes.Role, "Administrator"),
